@@ -1,7 +1,7 @@
 LazyLoader
 ==========
 
-LazyLoader provides simple mechanism for lazy loading with closures.
+LazyLoader provides efficient mechanism for lazy loading with closures.
 
 Basic Usage
 -----------
