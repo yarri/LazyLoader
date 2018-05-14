@@ -31,8 +31,8 @@
  */
 class LazyLoader implements ArrayAccess {
 
-	protected $closures = [];
-	protected $cache = [];
+	protected $closures = array();
+	protected $cache = array();
 
 	function __construct(){
 
