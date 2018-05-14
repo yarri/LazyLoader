@@ -69,7 +69,7 @@ Recent articles are displayed on every page in the sidebar. So a caching is appr
     {* file: app/layouts/default.tpl *}
 
     <div class="sidebar">
-      {cache key=recent_articles expired=600}
+      {cache key=recent_articles expire=600}
         {render partial="shared/recent_articles" recent_articles=$lazy_loader.recent_articles}
       {/cache}
     </div>
