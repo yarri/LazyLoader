@@ -1,7 +1,7 @@
 {
         "name": "yarri/lazy-loader",
         "type": "library",
-        "description": "LazyLoader provides simple mechanism for lazy loading with closures",
+        "description": "LazyLoader provides efficient mechanism for lazy loading with closures",
         "keywords": ["lazy load","lazy","closure"],
         "homepage": "https://github.com/yarri/LazyLoader",
         "license": ["MIT"],
