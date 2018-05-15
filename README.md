@@ -5,6 +5,8 @@ LazyLoader
 
 LazyLoader provides efficient mechanism for lazy loading with closures.
 
+In LazyLoader one or more named closures can be defined. Any  closure is called just once when its output is needed.
+
 Basic Usage
 -----------
 
@@ -12,10 +14,14 @@ LazyLoader implements ArrayAccess, thus the easiest way how to use is like an as
 
     $lazy_loader = new LazyLoader();
 
-    // Setting up closure
+    // Setting up a closure,
     $lazy_loader["recent_articles"] = function(){
        return Article::FindAll(["order_by" => "published_at DESC", "limit" => 10]);
     };
+    // ... another closure
+    $lazy_loader["top_product"] = function(){
+      return Product::FindFirst(["order_by" => "pieces_sold DESC"]);
+    }
 
     // Reading - closure is being executed just in the first occurence of reading
     if($lazy_loader["recent_articles"]){
@@ -23,6 +29,32 @@ LazyLoader implements ArrayAccess, thus the easiest way how to use is like an as
         // ...
       }
     }
+    //
+    $top_product = $lazy_loader["top_product"];
+
+There are total three ways how to set closures or get their outputs. All of them do the same thing and can be mixed.
+
+    // Setting a closure
+    $lazy_loader->set("recent_articles",function(){ /* ... */ });
+    // or
+    $lazy_loader["recent_articles"] = function(){ /* ... */ };
+    // or
+    $lazy_loader->setRecentArticles(function(){ /* ... */ });
+
+    // Getting outputs
+    $recent_articles = $lazy_loader->get("recent_articles");
+    // or
+    $recent_articles = $lazy_loader["recent_articles"];
+    // or
+    $recent_articles = $lazy_loader->getRecentArticles();
+
+Also arguments can be involved. In this case the usage of camelized virtual methods comes in handy.
+
+    $lazy_loader->setRecentArticles(function($limit = 5){
+       return Article::FindAll(["order_by" => "published_at DESC", "limit" => $limit]);
+    });
+
+    $ten_recent_articles = $lazy_loader->getRecentArticles(10);
 
 Usage in a template engine
 --------------------------
@@ -94,15 +126,6 @@ A shared template doesn't have to know anything about lazy loading.
 
 As you may expected, the "recent_articles" closure is executed only when the cache is re-created.
 
-Lazy loading with arguments
----------------------------
-
-    $lazy_loader->setRecentArticles(function($limit = 5){
-       return Article::FindAll(["order_by" => "published_at DESC", "limit" => $limit]);
-    });
-
-    $ten_recent_articles = $lazy_loader->getRecentArticles(10);
- 
 Installation
 ------------
 
