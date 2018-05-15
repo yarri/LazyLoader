@@ -50,11 +50,11 @@ There are total three ways how to set closures or get their outputs. All of them
 
 Also arguments can be involved. In this case the usage of camelized virtual methods comes in handy.
 
-    $lazy_loader->setRecentArticles(function($limit = 5){
+    $lazy_loader->setRecentArticles(function($limit = 10){
        return Article::FindAll(["order_by" => "published_at DESC", "limit" => $limit]);
     });
 
-    $ten_recent_articles = $lazy_loader->getRecentArticles(10);
+    $five_recent_articles = $lazy_loader->getRecentArticles(5);
 
 Usage in a template engine
 --------------------------
@@ -67,17 +67,13 @@ Preparing data for a Smarty template:
 
 In a Smarty template:
 
-    {if $lazy_loader.recent_articles}
+    <h3>Recent Articles</h3>
 
-      <h3>Recent Articles</h3>
-
-      <ul>
-        {foreach $lazy_loader.recent_articles as $article}
-          <li><a href="{$article->getUrl()}">{$article->getTitle()}</a></li>
-        {/foreach}
-      </ul>
-
-    {/if}
+    <ul>
+      {foreach $lazy_loader.recent_articles as $article}
+        <li><a href="{$article->getUrl()}">{$article->getTitle()}</a></li>
+      {/foreach}
+    </ul>
 
 Usage in the ATK14 Framework
 ----------------------------
@@ -98,31 +94,27 @@ Usage in the ATK14 Framework
       }
     }
 
-Recent articles are displayed on every page in the sidebar. So a caching is appropriate.
+Recent articles are displayed on every page in the sidebar. So caching is appropriate.
 
     {* file: app/layouts/default.tpl *}
 
-    <div class="sidebar">
-      {cache key=recent_articles expire=600}
-        {render partial="shared/recent_articles" recent_articles=$lazy_loader.recent_articles}
-      {/cache}
-    </div>
+    {cache key=sidebar expire=600}
+      <div class="sidebar">
+          {render partial="shared/recent_articles" recent_articles=$lazy_loader.recent_articles}
+      </div>
+    {/cache}
 
 A shared template doesn't have to know anything about lazy loading.
 
     {* file: app/views/shared/_recent_articles.tpl *}
 
-    {if $recent_articles}
+    <h3>Recent Articles</h3>
 
-      <h3>Recent Articles</h3>
-
-      <ul>
-        {foreach $recent_articles as $article}
-          <li><a href="{$article->getUrl()}">{$article->getTitle()}</a></li>
-        {/foreach}
-      </ul>
-
-    {/if}
+    <ul>
+      {foreach $recent_articles as $article}
+        <li><a href="{$article->getUrl()}">{$article->getTitle()}</a></li>
+      {/foreach}
+    </ul>
 
 As you may expected, the "recent_articles" closure is executed only when the cache is re-created.
 
