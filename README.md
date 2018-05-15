@@ -56,8 +56,7 @@ Also arguments can be involved. In this case the usage of camelized virtual meth
 
     $five_recent_articles = $lazy_loader->getRecentArticles(5);
 
-Usage in a template engine
---------------------------
+### Usage in a template engine
 
 LazyLoader can be gracefully used in any template engine, for instance in [the Smarty](http://www.smarty.net/).
 
@@ -75,8 +74,7 @@ In a Smarty template:
       {/foreach}
     </ul>
 
-Usage in the ATK14 Framework
-----------------------------
+### Usage in the ATK14 Framework
   
     <?php
     // file: app/controllers/application.php
@@ -119,6 +117,13 @@ A shared template doesn't have to know anything about lazy loading.
     </ul>
 
 As you may expected, the "recent_articles" closure is executed only when the cache is re-created.
+
+### Tracy panel integration
+
+LazyLoader package comes with LazyLoaderPanel for easy integration into the popular debugger Tracy (https://packagist.org/packages/tracy/tracy)
+
+    $tracy_bar = Tracy\Debugger::getBar();
+    $tracy_bar->addPanel(new LazyLoaderPanel($lazy_loader));
 
 Installation
 ------------

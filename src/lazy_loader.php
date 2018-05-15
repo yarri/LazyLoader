@@ -74,6 +74,16 @@ class LazyLoader implements ArrayAccess {
 		return $this->cache[$key][$arguments_md5];
 	}
 
+	function profilerData(){
+		$out = array();
+		foreach($this->closures as $key => $c){
+			$out[$key] = array(
+				"executed" => !isset($this->cache[$key]) ? 0 : sizeof($this->cache[$key]),
+			);
+		}
+		return $out;
+	}
+
 	/**
 	 * Magic method changes calling to an nonexistent method in this way:
 	 *
@@ -97,7 +107,6 @@ class LazyLoader implements ArrayAccess {
 
 		throw new Exception("LazyLoader::__call(): unknown method $name()");
 	}
-
 
 	/*** functions implementing array like access ***/
 
