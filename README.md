@@ -5,7 +5,7 @@ LazyLoader
 
 LazyLoader provides efficient mechanism for lazy loading with closures.
 
-In LazyLoader one or more named closures can be defined. Any  closure is called just once when its output is needed.
+In LazyLoader one or more named closures can be defined. Any  closure is called at most once when its output is needed.
 
 Basic Usage
 -----------
@@ -79,6 +79,8 @@ Usage in the ATK14 Framework
 ----------------------------
   
     <?php
+    // file: app/controllers/application.php
+
     class ApplicationController extends Atk14Controller {
 
       // ..
