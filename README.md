@@ -32,7 +32,7 @@ LazyLoader implements ArrayAccess, thus the easiest way how to use is like an as
     //
     $top_product = $lazy_loader["top_product"];
 
-There are total three ways how to set closures or get their outputs. All of them do the same thing and can be mixed.
+There are total three ways how to set a closure or get its output. All of them do the same thing and can be mixed.
 
     // Setting a closure
     $lazy_loader->set("recent_articles",function(){ /* ... */ });
@@ -41,7 +41,7 @@ There are total three ways how to set closures or get their outputs. All of them
     // or
     $lazy_loader->setRecentArticles(function(){ /* ... */ });
 
-    // Getting outputs
+    // Getting the output
     $recent_articles = $lazy_loader->get("recent_articles");
     // or
     $recent_articles = $lazy_loader["recent_articles"];
