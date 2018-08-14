@@ -34,13 +34,19 @@ class LazyLoaderPanel implements Tracy\IBarPanel {
 		$out[] = '<tr>';
 		$out[] = '<th>Closure</th>';
 		$out[] = '<th>Executed</th>';
+		$out[] = '<th>Duration</th>';
 		$out[] = '</tr>';
 		$out[] = '</thead>';
 		$out[] = '</body>';
 		foreach($p_data as $key => $v){
+			$duration = $v['duration'];
+			if(isset($duration)){
+				$duration = sprintf('%sms',number_format($duration * 1000,1,'.',''));
+			}
 			$out[] = '<tr>';
 			$out[] = '<td>'.$key.'</td>';
 			$out[] = '<td>'.$v['executed'].'&times;</td>';
+			$out[] = "<td>$duration</td>";
 			$out[] = '</tr>';
 		}
 		$out[] = '</tbody>';

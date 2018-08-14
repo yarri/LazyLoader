@@ -33,9 +33,10 @@ class LazyLoader implements ArrayAccess {
 
 	protected $closures = array();
 	protected $cache = array();
+	protected $stop_watch = null;
 
 	function __construct(){
-
+		$this->stop_watch = new StopWatch();
 	}
 
 	/**
@@ -68,7 +69,9 @@ class LazyLoader implements ArrayAccess {
 
 		if(!array_key_exists($arguments_md5,$this->cache[$key])){
 			$closure = $this->closures[$key];
+			$this->stop_watch->start($key);
 			$this->cache[$key][$arguments_md5] = call_user_func_array($closure,$arguments);
+			$this->stop_watch->stop($key);
 		}
 
 		return $this->cache[$key][$arguments_md5];
@@ -79,6 +82,7 @@ class LazyLoader implements ArrayAccess {
 		foreach($this->closures as $key => $c){
 			$out[$key] = array(
 				"executed" => !isset($this->cache[$key]) ? 0 : sizeof($this->cache[$key]),
+				"duration" => $this->stop_watch->getResult($key),
 			);
 		}
 		return $out;
