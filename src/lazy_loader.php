@@ -77,6 +77,17 @@ class LazyLoader implements ArrayAccess {
 		return $this->cache[$key][$arguments_md5];
 	}
 
+	/**
+	 *
+	 *	$articles = [];
+	 *	$lazy_loader->defined("recent_articles"){
+	 *		$articles = $lazy_loader["recent_articles"];
+	 *	}
+	 */
+	function defined($key){
+		return array_key_exists($key,$this->closures);
+	}
+
 	function profilerData(){
 		$out = array();
 		foreach($this->closures as $key => $c){

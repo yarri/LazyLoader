@@ -34,6 +34,10 @@ class LazyLoaderTest extends TestCase {
 		$this->assertEquals("Tea",$ll->getFavouriteDrink("morning"));
 		$this->assertEquals("Beer",$ll->getFavouriteDrink("evening"));
 
+		// defined
+		$this->assertEquals(true,$ll->defined("job"));
+		$this->assertEquals(false,$ll->defined("unitialized"));
+
 		// requesting uninitialized value throws an exception
 		$exception_msg = "";
 		try{
@@ -42,6 +46,5 @@ class LazyLoaderTest extends TestCase {
 			$exception_msg = $e->getMessage();
 		}
 		$this->assertEquals("LazyLoader: uninitialized value requested: unitialized",$exception_msg);
-
 	}
 }
