@@ -23,7 +23,7 @@ LazyLoader implements ArrayAccess, thus the easiest way how to use is like an as
       return Product::FindFirst(["order_by" => "pieces_sold DESC"]);
     }
 
-    // Reading - closure is being executed just in the first occurence of reading
+    // Reading - closure is being executed only during the first occurence of reading
     if($lazy_loader["recent_articles"]){
       foreach($lazy_loader["recent_articles"] as $article){
         // ...
