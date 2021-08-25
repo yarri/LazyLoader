@@ -1,7 +1,5 @@
 <?php
-use PHPUnit\Framework\TestCase;
-
-class LazyLoaderTest extends TestCase {
+class TcLazyLoader extends TcBase {
 	
 	function test(){
 		$ll = new LazyLoader();

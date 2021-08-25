@@ -21,4 +21,4 @@ before_install:
   - composer update --dev
 
 script:
-  - ./test/run_tests.sh
+  - cd test && ../vendor/bin/run_unit_tests
