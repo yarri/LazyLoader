@@ -1,7 +1,7 @@
 LazyLoader
 ==========
 
-[![Build Status](https://travis-ci.com/yarri/LazyLoader.svg?branch=master)](https://travis-ci.com/yarri/LazyLoader)
+[![Build Status](https://app.travis-ci.com/yarri/LazyLoader.svg?branch=master)](https://app.travis-ci.com/yarri/LazyLoader)
 
 LazyLoader provides efficient mechanism for lazy loading with closures.
 
