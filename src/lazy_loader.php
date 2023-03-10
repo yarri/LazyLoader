@@ -128,20 +128,24 @@ class LazyLoader implements ArrayAccess {
 	/**
 	 * @ignore
 	 */
+	#[\ReturnTypeWillChange]
 	function offsetExists($key){ return in_array($key,$this->closures); }
 
 	/**
 	 * @ignore
 	 */
+	#[\ReturnTypeWillChange]
 	function offsetGet($key){ return $this->get($key); }
 
 	/**
 	 * @ignore
 	 */
+	#[\ReturnTypeWillChange]
 	function offsetSet($key,$closure){ return $this->set($key,$closure); }
 
 	/**
 	 * @ignore
 	 */
+	#[\ReturnTypeWillChange]
 	function offsetUnset($key){ unset($this->closures[$key]); unset($this->cache[$key]); }
 }
