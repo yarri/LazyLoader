@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.2] - 2032-03-10
+
+* e9b2b75 - PHP8.1 issues
+
 ## [1.2.1] - 2022-05-10
 - Project is compatible with PHP ^5.3|^7.0
 
